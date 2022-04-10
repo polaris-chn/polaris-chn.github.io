@@ -7,10 +7,10 @@ date_format: "ordinal"
 title: Polaris
 subtitle: "公众号：闷骚的程序员"
 description: "Polaris的个人博客"
-keywords: 码志, Zhuang Ma, mzlogin, mazhuang, 闷骚的程序员
+keywords: IC, Polaris, polaris-chn, 数字电路, 芯片设计
 timezone: Asia/HangZhou
 encoding: "utf-8"
-repository: mzlogin/mzlogin.github.io
+repository: polaris-chn/polaris-chn.github.io
 # 对 css 和 js 资源的 cdn 加速配置
 cdn:
     jsdelivr:
