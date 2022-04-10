@@ -1,18 +1,20 @@
 ---
 layout: page
 title: About
-description: 打码改变世界
-keywords: Zhuang Ma, 马壮
+description: 计算改变世界
+keywords: Polaris
 comments: true
 menu: 关于
 permalink: /about/
 ---
 
-我是马壮，码而生，码而立。
+我是Polaris，集成电路专业学生
 
-仰慕「优雅编码的艺术」。
+会一些数字电路前端设计，对计算机专业也感兴趣
 
-坚信熟能生巧，努力改变人生。
+前几年欠账太多，现在正在拼命补课
+
+树立坚持学习的信念，养成良好的学习方法，提升自己的学习效率，构建完整的知识体系
 
 ## 联系
 
