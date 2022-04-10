@@ -1,3 +1,11 @@
+---
+layout: post
+title: Verilog编程-2. 流水线乘法器设计
+categories: Verilog
+description: 设计一个流水线乘法器
+keywords: Verilog
+---
+
 # Verilog编程-2. 流水线乘法器设计
 
 ## 1. 背景
