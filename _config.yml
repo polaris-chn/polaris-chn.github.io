@@ -2,7 +2,7 @@
 #   Main Configs   #
 # ---------------- #
 baseurl:
-url: https://polaris-chn.github.io/
+url: https://polaris-chn.github.io
 date_format: "ordinal"
 title: Polaris
 subtitle: "公众号：闷骚的程序员"
