@@ -18,7 +18,7 @@ keywords: Verilog
 
 ​		使用数字电路中常用的Mealy型有限状态机（FSM）进行设计，Mealy型有限状态机其输出不仅与当前状态有关，还取决于当前输入信号。下图呈现的是状态转移图。
 
-![image-20210801110047720](https://github.com/polaris-chn/polaris-chn.github.io/blob/main/%E5%9B%BE/%E5%9B%BE1.png)
+![](/images/blog/picture1.png)
 
 需要注意的是，某些状态在产生非序列需要数字的时候，其状态转移并不是保持或者跳转到idle状态，例如在s2状态时输入为`1`，此时状态会跳转到s1，因为此时s2输入时的`1`，可以作为下一个`10010`序列的s1状态，还要几个状态跳转也是如此。
 
@@ -196,7 +196,7 @@ clean:
 
 ​		下图为使用vcs软件仿真得到波形图
 
-![image-20210801111426740](https://github.com/polaris-chn/polaris-chn.github.io/blob/main/%E5%9B%BE/%E5%9B%BE2.png)
+![](/images/blog/picture2.png)
 
 由上图可知，在data_in信号输入序列`10010`的时候，输出信号data_out会输出信号`1`，否则输出为`0` 。
 
