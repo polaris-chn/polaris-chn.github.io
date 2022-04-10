@@ -18,7 +18,7 @@ keywords: Verilog
 
 ​		二进制乘法与我们熟悉的十进制乘法类似，其原理都是被乘数与乘数的每一位按位相乘并进行移位，其原理示意图如下图所示：
 
-![图3](https://github.com/polaris-chn/polaris-chn.github.io/blob/main/%E5%9B%BE/%E5%9B%BE3.png)
+![](/images/blog/picture3.png)
 
 据此，我们自然可以想到，先将被乘数进行扩位到乘积的位宽，同时被乘数和乘数进行移位（被乘数左移，乘数右移），通过判断乘数最低位进而累加被乘数，从而可以得到最终的乘积结果。由于乘积的宽度不会大于被乘数和乘数位宽之和，所以就首先将被乘数扩位到两者之和的位宽即可。再向前一步，由于移位累加需要的周期数至少是乘数的位宽，所以我们可以采用流水线的方式，将每一步累加的结果都保存下来，进而给下次的乘法腾出计算空间，这样可以提升乘法器运行的效率。
 
@@ -466,13 +466,13 @@ clean:
 
 ​		下图是使用vcs软件仿真不具有流水线功能的乘法器得到的波形图
 
-![图4](https://github.com/polaris-chn/polaris-chn.github.io/blob/main/%E5%9B%BE/%E5%9B%BE4.png)
+![](/images/blog/picture4.png)
 
 
 
 下图是使用vcs软件仿真具有流水线功能的乘法器得到的波形图
 
-![图5](https://github.com/polaris-chn/polaris-chn.github.io/blob/main/%E5%9B%BE/%E5%9B%BE5.png)
+![](/images/blog/picture5.png)
 
 
 

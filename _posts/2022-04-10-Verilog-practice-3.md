@@ -2,11 +2,11 @@
 layout: post
 title: Verilog编程-3.阻塞与非阻塞
 categories: Verilog
-description: 对一个序列检测问题的解答
+description: 对于阻塞与非阻塞的详细解答
 keywords: Verilog
 ---
 
-﻿# Verilog编程-3. 阻塞与非阻塞
+# Verilog编程-3. 阻塞与非阻塞
 
 
 
@@ -176,13 +176,12 @@ endmodule
 
 ​		使用vivado开发套件进行综合，下图分别为`test1.v`，`test2.v`，`test3.v`，`test4.v`程序综合之后形成的电路图。
 
-![在这里插入图片描述](https://img-blog.csdnimg.cn/9da36a10c84c4866ab8b36c2c137f93a.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2xpdXFpbmcxMzg2NTc=,size_16,color_FFFFFF,t_70#pic_center)
-![在这里插入图片描述](https://img-blog.csdnimg.cn/329401dd0eab43a4a0dd37427941b57a.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2xpdXFpbmcxMzg2NTc=,size_16,color_FFFFFF,t_70#pic_center)
+![](/images/blog/picture6.png)
+![](/images/blog/picture7.png)
 
 
-![在这里插入图片描述](https://img-blog.csdnimg.cn/14c50110ff87460cb2b7362e38b4e7eb.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2xpdXFpbmcxMzg2NTc=,size_16,color_FFFFFF,t_70#pic_center)
-
-![在这里插入图片描述](https://img-blog.csdnimg.cn/2d401eb99a5f4fe19be8ee4a94bf070b.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2xpdXFpbmcxMzg2NTc=,size_16,color_FFFFFF,t_70#pic_center)
+![](/images/blog/picture8.png)
+![](/images/blog/picture9.png)
 
 
 
