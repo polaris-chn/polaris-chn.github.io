@@ -6,9 +6,7 @@ description: 对于阻塞与非阻塞的详细解答
 keywords: Verilog
 ---
 
-# Verilog编程-3.阻塞与非阻塞
-
-
+# Verilog编程-3. 阻塞与非阻塞
 
 ## 1. 背景
 
