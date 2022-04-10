@@ -8,7 +8,7 @@ title: Polaris
 subtitle: "公众号：闷骚的程序员"
 description: "Polaris的个人博客"
 keywords: 码志, Zhuang Ma, mzlogin, mazhuang, 闷骚的程序员
-timezone: Asia/Shanghai
+timezone: Asia/HangZhou
 encoding: "utf-8"
 repository: mzlogin/mzlogin.github.io
 # 对 css 和 js 资源的 cdn 加速配置
@@ -51,12 +51,12 @@ highlight_theme: github
 # ---------------- #
 #      Author      #
 # ---------------- #
-author: Zhuang Ma
+author: Polaris
 organization: 
 organization_url: 
-github_username: mzlogin
-location: Wuhan, China
-email: chumpma@gmail.com
+github_username: polaris-chn
+location: HangZhou, China
+email: polaris_chn@163.com
 
 # ---------------- #
 #    Navigation    #
