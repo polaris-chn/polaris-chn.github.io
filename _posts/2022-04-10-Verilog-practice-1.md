@@ -1,12 +1,10 @@
----
+<!-- ---
 layout: post
 title: Verilog编程-1.10010序列检测器
 categories: Verilog
 description: 对一个序列检测问题的解答
 keywords: Verilog
----
-
-
+--- -->
 
 # Verilog编程-1.10010序列检测器
 
