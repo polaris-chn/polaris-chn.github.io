@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Verilog编程-3.阻塞与非阻塞
+title: Verilog编程-3. 阻塞与非阻塞
 categories: Verilog
 description: 对于阻塞与非阻塞的详细解答
 keywords: Verilog
