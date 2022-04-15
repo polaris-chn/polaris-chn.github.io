@@ -76,8 +76,127 @@ assign overflow = (b==4'b1000) ? (a[3]==~b[3] && result[3]!=a[3]) : (a[3]==temp[
 
 
 ## 4. 代码
+整个工程包括 `adder.v`，`suber.v` 源文件，`top_tb.v` 仿真文件，`top.f` 文件列表文件以及 `Makefile` 文件。文件编辑平台是 `vscode`, 仿真平台是Ubuntu系统下的VCS，波形显示软件是Verdi。具体文件内容如下所示。
 
-​		
+### adder.v
+```verilog
+module adder (
+    input [3:0] a, b,
+    output ca,
+    output [3:0] result,
+    output overflow,
+    output zf
+);
+
+    // 这种方法对于有符号数来说是正确的，获得进位，结果，是否溢出以及0判断是正确的
+    assign {ca, result} = a + b;
+    assign overflow = (a[3]==b[3]) && (result[3]!=a[3]);
+    assign zf = ~(|result);
+    
+endmodule
+```
+
+### suber.v
+```verilog
+module suber (
+    input wire [3:0] a, b,
+    output ca,
+    output [3:0] result,
+    output overflow,
+    output zf
+);
+    wire [3:0] temp;
+    assign temp = ~b + 1;
+    assign {ca, result} = a + temp;
+    assign overflow = (b==4'b1000) ? (a[3]==~b[3] && result[3]!=a[3]) : (a[3]==temp[3] && result[3]!=a[3]);
+    assign zf = ~(|result);
+    
+endmodule
+```
+
+### top_tb.v
+如果需要仿真加法器模块，将实例化中的 `suber` 模块换成 `adder` 模块即可。
+```verilog
+module top_tb;
+    reg  [3:0] a, b;
+    wire [3:0] result;
+    wire ca;
+    wire overflow;
+    wire zf;
+
+    suber uut1(
+        .a      (a),
+        .b      (b),
+        .result (result),
+        .ca     (ca),
+        .overflow   (overflow),
+        .zf         (zf)
+    );
+
+    initial begin
+        integer i,j;
+        for (i=0; i<16; i=i+1) begin
+            for (j=0; j<16; j=j+1) begin
+                #5 a = i; b = j;
+            end
+        end 
+        #50 $finish;
+    end
+    
+    `ifdef FSDB
+    initial begin
+        $fsdbDumpfile("top.fsdb");
+        $fsdbDumpvars();
+    end
+    `endif
+    
+endmodule
+```
+
+### Makefile
+
+```makefile 
+.PHONY: sim, verdi, clean
+
+PROJECT = top
+
+VCS =	vcs \
+		-R \
+		-timescale=1ns/1ps \
+		-debug_all \
+		-fsdb \
+		+define+FSDB \
+		-full64 \
+		+v2k \
+		-sverilog \
+
+VERDI =	verdi \
+		-sv \
+		-nologo \
+		-ssf ${PROJECT}.fsdb \
+
+
+sim:
+	make clean
+	${VCS} -f ${PROJECT}.f
+
+
+verdi:
+	${VERDI} -f ${PROJECT}.f &
+
+clean:
+	rm -rf ./csrc ./DVEfiles *.daidir *.log simv* *.key *.vpd \
+				verdi* novas* *.fsdb
+```
+
+
+### top.f
+```
+./adder.v
+./suber.v
+./top_tb.v
+
+```		
 
 ## 5. 仿真结果
 
