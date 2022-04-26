@@ -1,19 +1,19 @@
-- name: Software Engineer Keywords
+- name: IC Design Engineer Keywords
   keywords:
-      - Java
-      - C++
+      - Verilog
+      - System Verilog
+      - Computer Architecture
+      - UVM
+
+- name: DL Engineer Keywords
+  keywords:
       - Python
-      - Design Patterns
+      - Deep Learning Model
+      - Edge AI
 
-- name: Mobile Developer Keywords
+- name: OS Developer Keywords
   keywords:
-      - Android
-      - Reverse Engineering
-
-- name: Windows Developer Keywords
-  keywords:
-      - Win32 SDK
-      - DuiLib
-      - WTL
-      - COM
-      - WinDbg
+      - OS
+      - C/C++
+      - Linux
+      - Compiler
