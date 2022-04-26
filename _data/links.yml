@@ -4,32 +4,28 @@
 
 - name: 咸鱼FPGA
   url: https://www.cnblogs.com/xianyufpga/
-  src: life
+  src: www
 
 - name: Trustintruth
   url: https://www.zhihu.com/people/suo-yi-xin-90
-  src: life
+  src: www
 
 - name: IC君
   url: https://www.zhihu.com/people/icstudy
-  src: life
+  src: www
 
 - name: 李一雷
   url: https://www.zhihu.com/people/li-yilei
-  src: life
+  src: www
 
 - name: 涂锋斌
   url: https://www.zhihu.com/people/tutudandan
-  src: life
+  src: www
 
 - name: 李虹江
   url: https://www.zhihu.com/people/li-hong-jiang-54
-  src: life
+  src: www
 
 - name: Forever snow
   url: https://www.zhihu.com/people/Foreversnow
-  src: life
-
-- name: 梦境迷离
-  url: https://dreamylost.cn
   src: www
