@@ -119,9 +119,9 @@ S型指令格式如下所示:
 
 |指令|imm[12]|imm[10:5]|rs2|rs1|func3|imm[4:1]|imm[11]|opcode|操作|
 |---|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|
-|beq    |imm[12]|imm[10:5]|rs2|rs1|000|imm[4:1]|imm[11]|1100011|if (rs1 == rs2) pc += sext(imm)|
-|bne    |imm[12]|imm[10:5]|rs2|rs1|001|imm[4:1]|imm[11]|1100011|if (rs1 != rs2) pc += sext(imm)|
-|blt    |imm[12]|imm[10:5]|rs2|rs1|100|imm[4:1]|imm[11]|1100011|if (rs1 < rs2) pc += sext(imm)，x[rs1]和x[rs2]为有符号数|
-|bltu   |imm[12]|imm[10:5]|rs2|rs1|110|imm[4:1]|imm[11]|1100011|if (rs1 < rs2) pc += sext(imm)，x[rs1]和x[rs2]为无符号数|
-|bge    |imm[12]|imm[10:5]|rs2|rs1|101|imm[4:1]|imm[11]|1100011|if (rs1 >= rs2) pc += sext(imm)，x[rs1]和x[rs2]为有符号数|
-|bgeu   |imm[12]|imm[10:5]|rs2|rs1|111|imm[4:1]|imm[11]|1100011|if (rs1 >= rs2) pc += sext(imm)，x[rs1]和x[rs2]为无符号数|
+|beq    |imm[12]|[10:5]|rs2|rs1|000|[4:1]|[11]|1100011|if (rs1 == rs2) pc += sext(imm)|
+|bne    |imm[12]|[10:5]|rs2|rs1|001|[4:1]|[11]|1100011|if (rs1 != rs2) pc += sext(imm)|
+|blt    |imm[12]|[10:5]|rs2|rs1|100|[4:1]|[11]|1100011|if (rs1 < rs2) pc += sext(imm)，x[rs1]和x[rs2]为有符号数|
+|bltu   |imm[12]|[10:5]|rs2|rs1|110|[4:1]|[11]|1100011|if (rs1 < rs2) pc += sext(imm)，x[rs1]和x[rs2]为无符号数|
+|bge    |imm[12]|[10:5]|rs2|rs1|101|[4:1]|[11]|1100011|if (rs1 >= rs2) pc += sext(imm)，x[rs1]和x[rs2]为有符号数|
+|bgeu   |imm[12]|[10:5]|rs2|rs1|111|[4:1]|[11]|1100011|if (rs1 >= rs2) pc += sext(imm)，x[rs1]和x[rs2]为无符号数|
