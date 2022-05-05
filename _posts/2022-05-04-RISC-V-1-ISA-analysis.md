@@ -136,4 +136,17 @@ I型指令格式如下：
 
 #### RV32I & RV64I
 
+|指令|imm[11:0]|rs1|func3|rd|opcode|操作|
+|---|:---:|:---:|:---:|:---:|:---:|:---:|
+|addi   |imm[11:0]|rs1|000|rd|0010011|x[rd]=x[rs1] + sext(imm)，忽略算术溢出|
+|slti   |imm[11:0]|rs1|010|rd|0010011|x[rd]=x[rs1] < s sext(imm)，x[rs1]小于符号位扩展的imm，rd置1，否则置0，两者都为有符号数|
+|sltiu  |imm[11:0]|rs1|011|rd|0010011|x[rd]=x[rs1] < u sext(imm)，x[rs1]小于符号位扩展的imm，rd置1，否则置0，两者都为无符号数|
+|andi   |imm[11:0]|rs1|111|rd|0010011|x[rd]=x[rs1] & sext(imm)，位与|
+|ori    |imm[11:0]|rs1|110|rd|0010011|x[rd]=x[rs1] &#124; sext(imm)，位或|
+|xori   |imm[11:0]|rs1|100|rd|0010011|x[rd]=x[rs1] ^ sext(imm)，位异或|
+|slli   |{000000,shamt}|rs1|001|rd|0010011|x[rd]=x[rs1] << shamt，逻辑左移，移位数为shamt，视为无符号数；RV32I中移位数为shamt低5位|
+|srli   |{000000,shamt}|rs1|101|rd|0010011|x[rd]=x[rs1] >> u shamt，逻辑右移，移位数为shamt，视为无符号数；RV32I中移位数为shamt低5位|
+|srai   |{010000,shamt}|rs1|101|rd|0010011|x[rd]=x[rs1] >> s shamt，算术右移，移位数为shamt，视为无符号数；RV32I中移位数为shamt低5位|
+
+
 #### RV64I
