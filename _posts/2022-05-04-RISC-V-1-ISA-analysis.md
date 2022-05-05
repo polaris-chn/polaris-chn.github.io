@@ -149,4 +149,27 @@ I型指令格式如下：
 |srai   |{010000,shamt}|rs1|101|rd|0010011|x[rd]=x[rs1] >> s shamt，算术右移，移位数为shamt，视为无符号数；RV32I中移位数为shamt低5位|
 
 
+|指令|imm[11:0]|rs1|func3|rd|opcode|操作|
+|---|:---:|:---:|:---:|:---:|:---:|:---:|
+|csrrw  |imm[11:0]|rs1|001|rd|1110011|t=CSRs[imm]; CSRs[imm]=x[rs1]; x[rd]=t，imm[11:0]指明是哪个csr，将csr旧值0扩展写入到rd，rs1的值写入到csr|
+|csrrs  |imm[11:0]|rs1|010|rd|1110011|t=CSRs[imm]; CSRs[imm]=t&#124;x[rs1]; x[rd]=t，imm[11:0]指明是哪个csr，将csr旧值0扩展写入到rd，rs1的值位或上csr旧值写入到csr|
+|csrrc  |imm[11:0]|rs1|011|rd|1110011|t=CSRs[imm]; CSRs[imm]=t&~x[rs1]; x[rd]=t，imm[11:0]指明是哪个csr，将csr旧值0扩展写入到rd，rs1的值先按位取反，再位与上csr旧值写入到csr|
+|csrrwi |imm[11:0]|zimm[4:0]|101|rd|1110011|x[rd]=CSRs[imm]; CSRs[imm]=zimm，imm[11:0]指明是哪个csr，将csr旧值0扩展写入到rd，5bit的zimm0扩展写入到csr|
+|csrrsi |imm[11:0]|zimm[4:0]|110|rd|1110011|t=CSRs[imm]; CSRs[imm]=t&#124;zimm; x[rd]=t，imm[11:0]指明是哪个csr，将csr旧值0扩展写入到rd，5bit的zimm0扩展和csr位或写入到csr|
+|csrrci |imm[11:0]|zimm[4:0]|111|rd|1110011|t=CSRs[imm]; CSRs[imm] =t&∼zimm; x[rd]=t，imm[11:0]指明是哪个csr，将csr旧值0扩展写入到rd，5bit的zimm0扩展先安慰取反，在和和csr位与写入到csr|
+
+|指令   |31~20|19~15|14~12|11~7|6~0|操作|
+|ecall  |000000000000|00000|000|00000|1110011|环境调用，通过引发环境调用异常来请求执行环境|
+|ebreak |000000000001|00000|000|00000|1110011|环境断点，通过抛出断点异常的方式请求调试器|
+
+
+
+
+|指令|31~20|19~15|14~12|11~7|6~0|操作|
+|---|:---:|:---:|:---:|:---:|:---:|:---:|
+|fence  |{0000,pred,succ}|00000|000|00000|0001111||
+|fence.i|000000000000|00000|001|00000|0001111||
+
+
+
 #### RV64I
