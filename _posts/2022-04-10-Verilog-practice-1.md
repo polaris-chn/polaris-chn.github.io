@@ -26,83 +26,83 @@ keywords: Verilog
 
 ## 3. 代码
 
-​		所有程序编辑平台为vscode，仿真平台为ubuntu系统中的vcs工具，分别包括源文件`seq_det.v`，仿真文件`seq_det_tb.v`，路径名列表文件`seq_det.f`和`makefile`文件。文件具体内容如下。
+​		所有程序编辑平台为vscode，仿真平台为ubuntu系统中的vcs工具，分别包括源文件`seq_det.v`，仿真文件`seq_det_tb.v`，路径名列表文件`seq_det.f`和`makefile`文件；波形显示工具为verdi。文件具体内容如下。
 
 ### 源文件
 
 ```verilog
 module seq_det (
-    input       clk,
-    input       rstn,
-    input       data_in,
-    output reg  data_out
+    input clk,
+    input rstn,
+    input data_in,
+    output reg data_out
 );
+    parameter   idle    = 3'b000,
+                s1      = 3'b001,
+                s2      = 3'b010,
+                s3      = 3'b011,
+                s4      = 3'b100,
+                s5      = 3'b101;
 
-    parameter idle = 0;
-    parameter s1   = 1;
-    parameter s2   = 2;
-    parameter s3   = 3;
-    parameter s4   = 4;
-    parameter s5   = 5;
-
-    reg [2:0] st_cur, st_next;
+    reg [2:0] curr_state, next_state;
     always @(posedge clk or negedge rstn) begin
         if (!rstn)
-            st_cur <= idle;
+            curr_state <= idle;
         else
-            st_cur <= st_next;
+            curr_state <= next_state;
     end
 
     always @(*) begin
-        case (st_cur)
-            idle: case(data_in)
-                0 : st_next = idle;
-                1 : st_next = s1;
-                default : st_next = idle;
-            endcase
+        case (curr_state)
+            idle: case (data_in)
+                0 : next_state = idle;
+                1 : next_state = s1;
+                default : next_state = idle;
+            endcase 
 
             s1: case (data_in)
-                0 : st_next = s2;
-                1 : st_next = s1; 
-                default: st_next = s1;
+                0 : next_state = s2;
+                1 : next_state = s1;
+                default : next_state = s1;
             endcase
 
             s2: case (data_in)
-                0 : st_next = s3;
-                1 : st_next = s1; 
-                default: st_next = s2;
+                0 : next_state = s3;
+                1 : next_state = s1;
+                default: next_state = s2;
             endcase
 
             s3: case (data_in)
-                0 : st_next = idle;
-                1 : st_next = s4; 
-                default: st_next = s3;
+                0 : next_state = idle;
+                1 : next_state = s4; 
+                default: next_state = s3;
             endcase
 
             s4: case (data_in)
-                0 : st_next = s5;
-                1 : st_next = s1; 
-                default: st_next = s4;
-            endcase
-            
-            s5: case (data_in)
-                0 : st_next = s3;
-                1 : st_next = idle; 
-                default: st_next= s5;
+                0 : next_state = s5;
+                1 : next_state = s1; 
+                default: next_state = s4;
             endcase
 
-            default: st_next = idle;
+            s5: case (data_in)
+                0 : next_state = s3;
+                1 : next_state = s1; 
+                default: next_state = s5;
+            endcase
+
+            default: next_state = idle;
         endcase
     end
 
     always @(posedge clk or negedge rstn) begin
-        if (!rstn) 
+        if (!rstn)
             data_out <= 0;
-        else if (st_cur==s4 && data_in==0)
-            data_out <= 1;
+        else if (next_state==s5 & data_in==0)
+            data_out <= 0;
         else
             data_out <= 0;
     end
+    
 
 endmodule
 ```
@@ -154,6 +154,15 @@ module seq_det_tb;
         #10 data_in = 0;
         #30 $finish;
     end
+
+
+    `ifdef FSDB
+    initial begin
+        $fsdbDumpfile("seq_det.fsdb");
+        $fsdbDumpvars();      
+    end
+    `endif
+
 endmodule
 ```
 
@@ -171,21 +180,34 @@ endmodule
 ### makefile文件
 
 ```makefile
-.PHONY: com sim clean
+.PHONY: sim, verdi, clean
 
-VCS = vcs 	-sverilog +v2k -timescale=1ns/1ns \
-			-debug_all
+PROJECT = seq_det
 
-SIM = ./simv -gui
+VCS =	vcs -sverilog \
+			+v2k \
+			-timescale=1ns/1ns \
+			-debug_all \
+			-R \
+			-fsdb \
+			+define+FSDB \
+			-full64 \
 
-com:
-		${VCS} -f seq_det.f
+VERDI = verdi 	-sv \
+				-nologo \
+				-ssf ${PROJECT}.fsdb \
 
-sim:
-		${SIM}
+
+sim: 
+		make clean
+		${VCS} -f ${PROJECT}.f
+
+verdi:
+		${VERDI} -f ${PROJECT}.f &
 
 clean:
-		rm -rf ./csrc ./DVEfiles *.daidir *.log simv* *.key *.vpd
+		rm -rf ./csrc ./DVEfiles *.daidir *.log simv* *.key *.vpd \
+				verdi* novas* *.fsdb
 ```
 
 
