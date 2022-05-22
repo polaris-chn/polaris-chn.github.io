@@ -12,9 +12,9 @@ timezone: Asia/HangZhou
 encoding: "utf-8"
 repository: polaris-chn/polaris-chn.github.io
 # 对 css 和 js 资源的 cdn 加速配置
-cdn:
-    jsdelivr:
-        enabled: true
+# cdn:
+#     jsdelivr:
+#         enabled: true
 # 可选组件配置
 components:
     # 分享
