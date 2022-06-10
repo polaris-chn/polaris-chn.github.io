@@ -7,5 +7,9 @@ keywords: Verilog
 ---
 
 # Verilog编程-6. 同步FIFO
+## 背景
+## 设计思路
+## 代码
+## 仿真结果
 
 
