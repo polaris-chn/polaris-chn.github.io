@@ -14,7 +14,7 @@ keywords: Verilog
 
 
 ## 2. 设计思路
-对于空满状态的判断，最常见的思路就是将FIFO中的读指针和写指针进行比较，然而由于多比特数据在跨时钟域传输的时候，很容易由于亚稳态而产生传输错误，所以对于读写指针来说，不可以直接进行跨时钟域传输。格雷码由于相邻数之间只有1比特的差别，所以可以大大减小亚稳态所产生的影响，所以，异步FIFO基本的设计思路是将读写指针转化为格雷码，再进行跨时钟域传输。同时，在跨时钟域传输的过程中，对于跨时钟域信号进行两级寄存器寄存，即打两拍，可以有效减少亚稳态产生的影响。综上可得，异步FIFO跨时钟域信号传输的基本思路是：两级寄存器同步加上格雷码。同时，我们还需要理清一个思路，那就是需要将写时钟域的写指针同步到读时钟域，将同步后的写指针与读时钟域的读指针进行比较产生空信号；将读时钟域的读指针同步到写时钟域，将同步后的读指针与写时钟域的写指针进行比较产生满信号。即在读时钟域产生读空信号，在写时钟域产生写满信号。
+对于空满状态的判断，最常见的思路就是将FIFO中的读指针和写指针进行比较，然而由于多比特数据在跨时钟域传输的时候，很容易由于亚稳态而产生传输错误，所以对于读写指针来说，不可以直接进行跨时钟域传输。格雷码由于相邻数之间只有1比特的差别，这样可以大大减小亚稳态所产生的影响，所以，异步FIFO基本的设计思路是将读写指针转化为格雷码，再进行跨时钟域传输。同时，在跨时钟域传输的过程中，对于跨时钟域信号进行两级寄存器同步，即打两拍，可以有效减少亚稳态产生的影响。综上可得，异步FIFO跨时钟域信号传输的基本思路是：两级寄存器同步加上格雷码。同时，我们还需要理清一个思路，那就是需要将写时钟域的写指针同步到读时钟域，将同步后的写指针与读时钟域的读指针进行比较产生空信号；将读时钟域的读指针同步到写时钟域，将同步后的读指针与写时钟域的写指针进行比较产生满信号。即在读时钟域产生读空信号，在写时钟域产生写满信号。
 
 ![](/images/blog/picture21.jpg)
 
@@ -75,7 +75,6 @@ assign rd_gray_ptr = (rd_ptr >> 1) ^ rd_ptr;
 // 空判断，在读时钟域中两级同步写指针
 reg [FIFO_DEPTH:0] wr_gray_ptr_r1;
 reg [FIFO_DEPTH:0] wr_gray_ptr_r2;
-
 always @(posedge rd_clk or negedge rd_rstn) begin
     if (!rd_rstn)
         {wr_gray_ptr_r2, wr_gray_ptr_r1} <= 0;
@@ -83,14 +82,13 @@ always @(posedge rd_clk or negedge rd_rstn) begin
         {wr_gray_ptr_r2, wr_gray_ptr_r1} <= {wr_gray_ptr_r1, wr_gray_ptr};
 end
 
-
+// 空判断，读写指针的格雷码相同
 assign empty = (rd_gray_ptr == wr_gray_ptr_r2);
 
 
 // 满判断，在写时钟域中两级同步读指针
 reg [FIFO_DEPTH:0] rd_gray_ptr_r1;
 reg [FIFO_DEPTH:0] rd_gray_ptr_r2;
-
 always@(posedge wr_clk or negedge wr_rstn) begin
     if (!wr_rstn)
         {rd_gray_ptr_r2, rd_gray_ptr_r1} <= 0;
@@ -98,6 +96,7 @@ always@(posedge wr_clk or negedge wr_rstn) begin
         {rd_gray_ptr_r2, rd_gray_ptr_r1} <= {rd_gray_ptr_r1, rd_gray_ptr};
 end
 
+// 满判断，读写指针的格雷码高两位相反，其他低位相同
 assign full = (wr_gray_ptr[FIFO_DEPTH:FIFO_DEPTH-1] == ~rd_gray_ptr_r2[FIFO_DEPTH:FIFO_DEPTH-1]) &&
                 (wr_gray_ptr[FIFO_DEPTH-2:0] == rd_gray_ptr_r2[FIFO_DEPTH-2:0]);
 
