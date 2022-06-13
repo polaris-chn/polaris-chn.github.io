@@ -71,8 +71,134 @@ LFSR通常由移位寄存器和异或门逻辑组成，其主要应用在：伪�
 影响线性反馈移位寄存器的下一个状态的比特位叫做抽头，选取的某些位构成的序列就是抽头序列。n个D触发器可以提供2^n-1个状态（除去全0状态，LFSR会陷入死循环），为了保证这个最长的周期，抽头序列的多项式加1必须是一个本原多项式，即不可约（就是不可以分解，不可以写成多个多项式相乘的形式），例如：G(x)=x^4 + x + 1。
 
 LFSR的初始状态是由传入的码字多项式提供的；并且当反馈系数不同时，得到的状态转移图也不同；必须保证gn==1，否则就没有反馈了；D触发器的个数越多，产生的状态就越多，也就越“随机”；如果真的进入到全0状态，那就经过~|Q[n-2:0]^Q[n-1]（这里是先或再取反），这样逻辑运算后输出的结果为1，保证线性反馈器不会陷入到死循环。
+
+
 ## 设计思路
 
+使用Verilog实现上图中生成函数为 G(x)=x^8 + x^6 + x^4 + 1 的伽罗瓦LFSR，其初始状态为8'b1001_1101。根据背景和原理介绍，LFSR主要由移位寄存器和异或门逻辑组成，将特定的抽头的比特位进行异或逻辑，就可以得到某一位的下一个状态了。
+
 ## 代码
+工程文件由源文件`lfsr.v`，仿真文件`lfsr_tb.v`，Makefile文件`makefile`和文件列表文件`lfsr.f`组成。编辑平台为`vscode`，仿真平台为`vcs`，波形查看平台为`verdi`。具体程序如下：
+
+### lfsr.v
+```verilog
+module lfsr (
+    input clk,
+    input rstn,
+    output reg q
+);
+
+// 移位寄存器
+reg [7:0] sr;
+always @(posedge clk or negedge rstn) begin
+    if (!rstn)
+        sr <= 8'b1001_1101;
+    else begin
+        sr[7]   <= sr[6];
+        sr[6]   <= sr[5] ^ sr[7];
+        sr[5]   <= sr[4];
+        sr[4]   <= sr[3] ^ sr[7];
+        sr[3]   <= sr[2];
+        sr[2]   <= sr[1];
+        sr[1]   <= sr[0];
+        sr[0]   <= sr[7];
+    end
+end
+
+
+always @(posedge clk or negedge rstn) begin
+    if (!rstn)
+        q <= 0;
+    else
+        q <= sr[7];
+end
+// assign q = sr[7];
+
+endmodule
+```
+
+### lfsr_tb.v
+```verilog
+module lfsr_tb;
+    reg clk;
+    reg rstn;
+    wire q;
+
+    lfsr uut (
+        .clk    (clk),
+        .rstn   (rstn),
+        .q      (q)
+    );
+
+    initial begin
+        clk = 0;
+        rstn = 0;
+        #20 rstn = 1;
+    end
+
+    initial begin
+        forever #5 clk = ~clk;
+    end
+
+    initial begin
+        #300 $finish;
+    end
+
+    `ifdef FSDB
+    initial begin
+        $fsdbDumpfile("lfsr.fsdb");
+        $fsdbDumpvars();
+    end
+    `endif 
+
+
+endmodule
+```
+
+### Makefile
+```makefile
+.PHONY: sim, verdi, clean
+
+PROJECT = lfsr
+
+VCS =	vcs \
+		-R \
+		-timescale=1ns/1ns \
+		-debug_all \
+		-fsdb \
+		+define+FSDB \
+		-full64 \
+		+v2k \
+		-sverilog \
+
+VERDI =	verdi \
+		-sv \
+		-nologo \
+		-ssf ${PROJECT}.fsdb \
+
+
+sim:
+	make clean
+	${VCS} -f ${PROJECT}.f
+
+
+verdi:
+	${VERDI} -f ${PROJECT}.f &
+
+clean:
+	rm -rf ./csrc ./DVEfiles *.daidir *.log simv* *.key *.vpd \
+				verdi* novas* *.fsdb
+
+```
+
+### lfsr.f
+```
+./lfsr.v
+./lfsr_tb.v
+```
 
 ## 仿真结果
+
+在初始状体为8'b1001_1101的情况下，其输出应该为1, 0, 1, 1, 1, 0...，下图是仿真显示的波形图，由图中可知，仿真结果显示正确。
+
+![](/images/blog/picture31.jpg)

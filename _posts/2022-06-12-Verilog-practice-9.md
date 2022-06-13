@@ -11,6 +11,7 @@ keywords: Verilog
 ## 背景
 [有用](https://www.nxpic.org.cn/article/id-CRCmo2)
 [可用](https://www.nxpic.org.cn/article/id-CRCmo2?p=2)
+
 ## 设计思路
 
 ## 代码
