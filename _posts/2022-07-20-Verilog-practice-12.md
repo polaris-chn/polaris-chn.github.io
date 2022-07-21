@@ -49,3 +49,5 @@ Booth乘法器和Wallace树乘法器是两种不同的思路，分别可以实�
 [进位保存加法器原理与设计](https://zhuanlan.zhihu.com/p/102387648)
 
 [Booth原理与Verilog实现](https://zhuanlan.zhihu.com/p/127164011)
+
+[改进的Booth乘法(基4)](https://www.cnblogs.com/lyc-seu/p/12890155.html)
