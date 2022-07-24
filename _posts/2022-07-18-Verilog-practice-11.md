@@ -9,7 +9,7 @@ keywords: Verilog
 # Verilog编程-11. 加法器和减法器设计
 
 ## 1. 背景
-加法器分为半加器、全加器、行波进位加法器（Ripple Carry Adder, RCA）、超前进位加法器（Lookahead Carry Adder, LCA）和进位保存加法器（Carry Save Adder, CSA）。
+加法器分为半加器（Half Adder, HA）、全加器（Full Adder, FA）、行波进位加法器（Ripple Carry Adder, RCA）、超前进位加法器（Lookahead Carry Adder, LCA）和进位保存加法器（Carry Save Adder, CSA）。
 
 ### 1.1 半加器和全加器 
 半加器只有输入a和b，以及输出sum和进位cout，均为单比特信号，没有输入进位cin；全加器不同于半加器的地方是，全加器带有输入进位cin，且均为单比特信号。半加器和全加器的行为级和数据流级Verilog描述如下所示：
@@ -42,6 +42,11 @@ RCA的缺点是第k位的输入进位Ckin必须依赖于前一级的输出进位
 
 ### 1.4 进位保存加法器
 进位保存加法器在执行多个数加法时具有极小的进位传播延时，它的基本思想是将3个加数的和减少为2个加数的和，将进位cout和sum分别计算保存，并且每bit可以独立计算cout以及sum，所以速度极快。CSA在Wallace树乘法器中有重要应用。**进位保存加法器又叫3-2压缩器(3:2 Compressor)**，即输入三个数据，输出两个数据（sum以及cout），其基本结构就是一个全加器。同样的还有4-2压缩器，4-2压缩器的效率是优于3-2压缩器的，但是4-2压缩器的内部的逻辑结构比3-2压缩器复杂，这也是用面积换性能的体现。CSA加法器结构由全加器组成，只是将sum以及cout分别保存，所以叫进位保存加法器，由CSA这种形式组成的加法器，叫Wallace树，并且如上所述，除了3-2压缩，还有4-2压缩。CSA适用于多个数相加的情况，例如在乘法中，有多个部分积相加，这种情况就很适合使用CSA。在多个数相加的情形下，CSA的效率是高于普通的加法器的。
+
+3:2 Compressor是进位保存加法器的一种，将3个数的和转换为2个数的和，通过其真值表可以看出，1bit的3:2 Compressor就是一个1bit全加器，可以将全加器FA直接变成进位保存加法器CSA。但是在多bit的情况下，全加器低位的进位需要传递到高位参与运算，也就产生了进位链，造成了延迟；而对于多bit 3:2 Compressor来说，没有进位链，所有的进位都是独立的，不需要参加高位的运算，这就是为什么CSA要比FA要快的原因。
+**<font color=red>这里放单比特FA和CSA示意图，在./image/blog/adder文件夹中</font>**
+
+**<font color=red>这里放多bit CSA的示意图，在./image/blog/adder文件夹中</font>**
 
 加法器还有更多的基本设计方式，例如进位旁路加法器(Carry Skip Adder, CSA)、进位选择加法器(Carry Select Adder, CSA)等，详情可见[硬件加法器原理与设计小结](https://zhuanlan.zhihu.com/p/110087554)，本篇文章只介绍RCA、LCA和CSA这S三种设计方法。
 
