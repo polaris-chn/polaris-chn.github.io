@@ -54,3 +54,11 @@
 - name: 周永权
   url: https://www.zhihu.com/people/zhou-yong-quan-37/posts
   src: www
+
+- name: 陈巍谈芯
+  url: https://www.zhihu.com/people/chenweiphd/posts?page=1
+  src: www
+
+- name: Morris.Zhang
+  url: https://www.zhihu.com/people/zhangshujia/posts
+  src: www
