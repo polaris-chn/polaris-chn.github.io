@@ -11,7 +11,18 @@ keywords: Verilog
 ## 简介
 
 ### 恢复余数除法器
+采用恢复余数法（Restoring Division Algorithm, RDA）设计除法器
 
 ### 不恢复余数除法器
+采用不恢复余数法（Non-Restoring Division Algorithm, NRDA）设计除法器
+
 
 ### SRT除法器
+采用SRT算法设计除法器，SRT算法是以D.Sweeney, J.E.Robertson和T.D.Tocher三位科学家的姓氏首字母组合命名的算法，旨在加速非恢复二进制除法。
+
+
+## 参考
+[恢复余数除法器](https://zhuanlan.zhihu.com/p/164633088)
+
+[不恢复余数除法器](https://zhuanlan.zhihu.com/p/206770701)
+
