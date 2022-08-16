@@ -82,3 +82,11 @@
 - name: 数字IC小站
   url: https://www.zhihu.com/people/chen-yang-bing-75-70/posts
   src: www
+
+- name: 艾斯奥特曼
+  url: https://www.zhihu.com/people/Ultraman-Tiga/answers
+  src: www
+
+- name: Spinal FPGA
+  url: https://www.zhihu.com/people/designer-30-72
+  src: www
