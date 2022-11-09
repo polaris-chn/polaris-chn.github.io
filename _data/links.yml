@@ -173,3 +173,7 @@
 - name: kkqq
   url: https://www.zhihu.com/people/xi-fu-hai-tang-38/posts
   src: www
+
+- name: 纸上谈芯
+  url: https://www.zhihu.com/people/zhishangtanxin/posts
+  src: www
