@@ -201,3 +201,11 @@
 - name: 加一茶匙快乐
   url: https://www.zhihu.com/people/gao-qin-xin-53/posts
   src: www
+
+- name: Bohan Hu
+  url: https://bohan-hu.github.io/
+  src: www
+
+- name: Pinging
+  url: https://www.zhihu.com/people/pinging-92/posts
+  src: www
