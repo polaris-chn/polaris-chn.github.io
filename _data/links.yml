@@ -209,3 +209,8 @@
 - name: Pinging
   url: https://www.zhihu.com/people/pinging-92/posts
   src: www
+
+- name: LogicJitterGibbs
+  url: https://www.zhihu.com/people/ljgibbs/columns
+  src: www
+  
