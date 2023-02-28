@@ -229,3 +229,7 @@
 - name: dxq
   url: https://www.zhihu.com/people/dxq-15-8/posts
   src: www
+
+- name: 陈巍谈芯
+  url: https://www.zhihu.com/people/chenweiphd
+  src: www
