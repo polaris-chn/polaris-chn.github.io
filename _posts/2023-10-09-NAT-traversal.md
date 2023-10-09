@@ -17,4 +17,14 @@ keywords: frp, 内网穿透
 frp是一个专注于内网穿透的高性能反向代理应用，支持TCP、UDP、HTTP、HTTPS等多种协议，可以将内网服务安全便捷地通过具有公网IP节点暴露到公网。通过在具有公网IP的节点上部署frp服务端，可以轻松地将内网服务穿透到公网，同时提供诸多专业的功能特性。
 
 ## frp内网穿透教程
-本教程借用云服务器作为公网，即服务端；公司局域网为内网，即客户端。实现ssh连接内网功能即可。
+本教程借用云服务器作为公网，即服务端；公司局域网为内网，即客户端，实现ssh连接内网功能即可。云服务器和局域网设备皆为Linux系统。
+
+### 服务端教程
+首先从[frp下载](https://github.com/fatedier/frp/releases)处下载相应安装包，例如`frp_0.51.3_linux_amd64.tar.gz`，将其解压并移动到`/usr/local`路径下
+```
+mkdir /usr/local/frp
+mv frp_0.51.3_linux_amd64* /usr/local/frp
+```
+
+
+### 客户端教程
