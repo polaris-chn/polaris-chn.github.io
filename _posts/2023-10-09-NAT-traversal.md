@@ -28,3 +28,5 @@ mv frp_0.51.3_linux_amd64* /usr/local/frp
 
 
 ### 客户端教程
+
+客户端也需要
