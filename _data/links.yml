@@ -257,3 +257,7 @@
 - name: CodeTalks
   url: https://howardlau.me/about
   src: www
+
+- name: Sylas
+  url: https://www.zhihu.com/people/shinez-zhou/posts
+  src: www
