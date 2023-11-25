@@ -1,6 +1,6 @@
 ---
 layout: post
-title: RISC-V交叉编译
+title: RISC-V 交叉编译
 categories: RISC-V
 description: RISCV交叉编译的内容
 keywords: RISC-V, 编译
