@@ -13,7 +13,7 @@ keywords: RISC-V, 编译
 # 交叉编译
 交叉编译的概念为：在当前环境下位目标环境进行程序编译。例如在x86_64机器上编译适用于RISC-V 64位机器的目标程序。此时需要使用交叉编译工具链。
 
-在此提供在x86_64架构，linux系统环境下编译RISC-V 64位程序的工具链，包括源码压缩包和已经编译好的压缩包。在[下载链接](链接：https://pan.baidu.com/s/1f8uzube6pmOMMJN_QZ8a_w 提取码：uw87 --来自百度网盘超级会员V2的分享)中，`riscv-gnu-toolchain`是编译器源码，下载后进行编译安装则可以使用；`riscv-unknown-linux`和`riscv-unknown-elf`则已经编译好，可直接使用。对于已经编译好的两个压缩包，在解压缩之后，将其路径添加到`.bashrc`文件之后即可使用，如下所示：
+在此提供在x86_64架构，linux系统环境下编译RISC-V 64位程序的工具链，包括源码压缩包和已经编译好的压缩包。在[下载链接](链接：https://pan.baidu.com/s/1rjZspMg3J9O2Z102z23xPg?pwd=6zt5)中，`riscv-gnu-toolchain`是编译器源码，下载后进行编译安装则可以使用；`riscv-unknown-linux`和`riscv-unknown-elf`则已经编译好，可直接使用。对于已经编译好的两个压缩包，在解压缩之后，将其路径添加到`.bashrc`文件之后即可使用，如下所示：
 ```
 export $PATH=/解压路径/riscv/bin:$PATH
 export $PATH=/解压路径/riscv64/bin:$PATH
@@ -28,7 +28,7 @@ export $PATH=/解压路径/riscv64/bin:$PATH
 - `riscv64-unknown-elf-objcopy` 为目标拷贝软件，可将目标/可执行文件转变成不同格式，例如binary, verilog格式等
 
 下面以一小段汇编代码`sample.S`为例进行演示
-```
+```s
 .org 0x0
  	.global _start
 _start:
@@ -40,7 +40,7 @@ _start:
 ```
 
 使用make工具进行工程化管理
-```
+```makefile
 CROSS_COMPILE = /riscv64-unknown-elf-
 
 # 编译.S文件，产生目标文件.o
