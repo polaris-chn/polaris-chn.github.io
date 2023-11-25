@@ -63,4 +63,9 @@ clean:
     rm -rf *.o *.out *.verilog
 ```
 
-最后产生的`.verilog`文件如下所示，即可读入testbench进行仿真。   
+最后在命令行输入命令`make sample.verilog`，产生的`.verilog`文件如下所示，即可读入testbench进行仿真。   
+```
+@00000000
+93 60 00 21 13 E1 10 02 93 11 11 00 13 F2 81 56
+93 62 A0 68
+```
