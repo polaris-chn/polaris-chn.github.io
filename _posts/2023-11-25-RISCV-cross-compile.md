@@ -53,7 +53,7 @@ CROSS_COMPILE = /riscv64-unknown-elf-
 
 # 反汇编.o文件，产生.s文件
 %.s: %.o
-    $(CROSS_COMPILE)objdump $< -o $@_dump
+    $(CROSS_COMPILE)objdump -d $< > $@.dump
 
 # 产生.verilog文件，可在verilog仿真文件中通过readmemh直接读入，验证CPU功能
 %.verilog: %.o
