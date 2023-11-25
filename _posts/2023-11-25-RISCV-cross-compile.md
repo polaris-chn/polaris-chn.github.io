@@ -41,7 +41,7 @@ _start:
 
 使用make工具进行工程化管理
 ```makefile
-CROSS_COMPILE = /riscv64-unknown-elf-
+CROSS_COMPILE = riscv64-unknown-elf-
 
 # 编译.S文件，产生目标文件.o
 %.o: %.S
