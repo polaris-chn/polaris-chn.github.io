@@ -269,3 +269,7 @@
 - name: Qianlong
   url: https://www.zhihu.com/people/baba2006/posts
   src: www
+
+- name: 菜鸡
+  url: https://www.zhihu.com/people/kong-chao-57-1/answers?page=1
+  src: www
