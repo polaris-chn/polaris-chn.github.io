@@ -273,3 +273,7 @@
 - name: 菜鸡
   url: https://www.zhihu.com/people/kong-chao-57-1/answers?page=1
   src: www
+ 
+- name: ArchShineZ
+  url: https://www.zhihu.com/people/shinez-zhou
+  src: www
