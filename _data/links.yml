@@ -301,3 +301,7 @@
 - name: LeonardT
   url: https://www.zhihu.com/people/leonardt
   src: www
+
+- name: LMSYS
+  url: https://lmsys.org/
+  src: www
