@@ -305,3 +305,7 @@
 - name: LMSYS
   url: https://lmsys.org/
   src: www
+
+- name: 郑思泽
+  url: https://www.zhihu.com/people/zheng-si-ze-45/posts
+  src: www
