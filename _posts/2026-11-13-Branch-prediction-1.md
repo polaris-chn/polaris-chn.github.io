@@ -19,12 +19,14 @@ keywords: branch predictor、PC、gshare、btb
 
 （4）总结：使用BHR/GHR/饱和计数器配合来对分支指令的方向进行预测；使用BTB/RAS/Target Cache对分支指令的目标地址进行预测；这些预测都是发生在取指阶段，即基于PC值来进行的；
 
-（5）饱和计数器捕捉跳转规律：对于2bit寄存器，数值为2'b11,表示strongly taken，计数器处于饱和状态，分支指令此次预测跳转；数值为2'b10,表示weakly taken，计数器处于不饱和状态，分支指令此次预测跳转；数值为2'b01，表示weakly not taken, 计数器处于不饱和状态，分支指令此次预测不发生跳转；数值为2'b00,表示strongly not taken，计数器处于饱和状态，分支指令预测不跳转。
+（5）饱和计数器捕捉跳转规律：对于2bit寄存器，数值为2'b11,表示strongly taken，计数器处于饱和状态，分支指令此次预测跳转；数值为2'b10,表示weakly taken，计数器处于不饱和状态，分支指令此次预测跳转；数值为2'b01，表示weakly not taken, 计数器处于不饱和状态，分支指令此次预测不发生跳转；数值为2'b00,表示strongly not taken，计数器处于饱和状态，分支指令预测不跳转。下图中的PHT中的每一项都是2bit的饱和计数器，对于每一个分支的PC，都有一个2bit的饱和计数器；若用PC中的k bit来寻址PHT，则PHT共有2^k项，总的大小为2^k * 2 bit。
 
 ![使用 PC 值的一部分来寻址饱和计数器](/images/blog/饱和计数器.png)
 
 （6）PHT(pattern history table)：是一个表格，其中存放着所有PC值（或者是PC值的一部分）对应的两位饱和计数器的值。
 
-（7）BHR(branch history register)：分支历史寄存器，对一条分支指令来说，通过将它每次的结果（跳转1/不跳转0）移入BHR，就可以记录这条分支指令的历史状态了，如果这条分支指令很有规律，就可以用BHR来对这条分支指令进行预测，称之为局部历史（local history）的预测方法。
+（7）BHR(branch history register)：分支历史寄存器，对一条分支指令来说，通过将它每次的结果（跳转1/不跳转0）移入BHR，就可以记录这条分支指令的历史状态了，如果这条分支指令很有规律，就可以用BHR来对这条分支指令进行预测，称之为局部历史（local history）的预测方法。理论上，每条分支指令都有自己对应的BHR和PHT，一个n位的BHR需要PHT的大小为2^n×2bit，如果为每条指令都配一个BHR和PHT，需要很大的存储空间，将所有分支指令的BHR组合在一起称为分支历史寄存器表（BHT, branch history register table）。实际上BHT不能照顾到每个PC，一般都是使用PC的一部分来寻址BHT，相当于一些PC共用一个BHR，同时PHT占用大量存储空间，更需要被复用。下图是一个示意图。
+
+![使用 PC 值的一部分来寻址 BHT 和 PHT](/images/blog/寻址BHT和PHT.png)
 
 （8）GHR(global history register)：全局历史寄存器，基于全局历史的分支预测方法中，使用GHR记录程序中所有的分支指令在过去的执行情况。现实中GHR的宽度不能无限大，故使用一个有限位宽的GHR来记录最近执行的所有分支指令的结果，每遇到一条分支指令，则将这条分支指令的结果插入到GHR的右边，最左边被移除的位会被抛弃掉。使用GHR预测的时候，还需要借助PHT，使用GHR寻址PHT，PHT仍由饱和计数器组成，使用饱和计数器来捕捉GHR的规律。
