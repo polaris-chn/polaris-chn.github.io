@@ -30,3 +30,5 @@ keywords: branch predictor、PC、gshare、btb
 ![使用 PC 值的一部分来寻址 BHT 和 PHT](/images/blog/寻址BHT和PHT.png)
 
 （8）GHR(global history register)：全局历史寄存器，基于全局历史的分支预测方法中，使用GHR记录程序中所有的分支指令在过去的执行情况。现实中GHR的宽度不能无限大，故使用一个有限位宽的GHR来记录最近执行的所有分支指令的结果，每遇到一条分支指令，则将这条分支指令的结果插入到GHR的右边，最左边被移除的位会被抛弃掉。使用GHR预测的时候，还需要借助PHT，使用GHR寻址PHT，PHT仍由饱和计数器组成，使用饱和计数器来捕捉GHR的规律。
+
+![基于全局历史的分支预测（GHR + PC 寻址 PHT）](/images/blog/基于全局历史的分支预测.png)
